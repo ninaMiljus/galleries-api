@@ -19,7 +19,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('api')->get('/galleries', [GalleryController::class, 'index']);
-Route::middleware('api')->get('/galleries/{id}', [GalleryController::class, 'show']);
+Route::get('/galleries', [GalleryController::class, 'index']);
+Route::get('/galleries/{id}', [GalleryController::class, 'show']);
+Route::post('/galleries', [GalleryController::class, 'store']);
+Route::put('/galleries/{id}', [GalleryController::class, 'update']);
+Route::delete('/galleries/{id}', [GalleryController::class, 'destroy']);
 
+// Route::resource('galleries', GalleryController::class);
 
