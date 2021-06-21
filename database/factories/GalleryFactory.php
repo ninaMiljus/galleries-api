@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Gallery;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class GalleryFactory extends Factory
@@ -22,7 +23,9 @@ class GalleryFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name'=>$this->faker->name(),
+            'description'=>$this->faker->text(50),
+            'user_id' => User::inRandomOrder()->first()->id,
         ];
     }
 }
