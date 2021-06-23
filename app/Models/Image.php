@@ -2,21 +2,20 @@
 
 namespace App\Models;
 
-use App\Models\Image;
+use App\Models\Gallery;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Gallery extends Model
+class Image extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'description',
-        'user_id',
+        'source',
+        'gallery_id'
     ];
 
-    public function images(){
-        return $this->hasMany(Image::class);
+    public function gallery(){
+        return $this->belongsTo(Gallery::class);
     }
 }
