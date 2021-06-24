@@ -9,14 +9,12 @@ use App\Http\Requests\UpdateGallery;
 
 class GalleryController extends Controller
 {
-    public function index()
-    {
+    public function index(){
         $results = Gallery::with('user', 'images');
         $galleries = $results->get();
 
         return response()->json($galleries);
     }
-
 
     public function show($id){
         $gallery = Gallery::findOrFail($id);
