@@ -20,13 +20,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware'=> 'auth:api'], function () {
-    Route::get('/galleries', [GalleryController::class, 'index']);
-    Route::get('/galleries/{id}', [GalleryController::class, 'show']);
-    Route::post('/galleries', [GalleryController::class, 'store']);
-    Route::put('/galleries/{id}', [GalleryController::class, 'update']);
-    Route::delete('/galleries/{id}', [GalleryController::class, 'destroy']);
-});
+Route::get('/galleries', [GalleryController::class, 'index']);
+Route::get('/galleries/{id}', [GalleryController::class, 'show']);
+Route::post('/galleries', [GalleryController::class, 'store']);
+Route::put('/galleries/{id}', [GalleryController::class, 'update']);
+Route::delete('/galleries/{id}', [GalleryController::class, 'destroy']);
+
 
 // Route::resource('galleries', GalleryController::class)->middleware('auth:api');
 

@@ -31,4 +31,8 @@ class Gallery extends Model
             'gallery_id' => $id
         ]);
     }
+
+    public static function search($name="") {
+        return self::where("name", "LIKE", "%$name%");
+    }
 }
