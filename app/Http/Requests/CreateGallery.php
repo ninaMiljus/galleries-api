@@ -24,9 +24,9 @@ class CreateGallery extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:2|max:255',
-            'description' => 'sometimes|max:1000',
-            'images.*.url' => ['sometimes|regex:/^(http)?s?:?(\/\/[^\']*\.(?:png|jpg|jpeg))/'],
+            "name"=> "required | string | min:2 | max:255",
+            "description"=>'sometimes | string | max:1000',
+            'source' => 'required|url'
         ];
     }
 }

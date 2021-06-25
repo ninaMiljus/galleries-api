@@ -26,8 +26,10 @@ Route::post('/galleries', [GalleryController::class, 'store']);
 Route::put('/galleries/{id}', [GalleryController::class, 'update']);
 Route::delete('/galleries/{id}', [GalleryController::class, 'destroy']);
 
+// Route::resource('galleries', GalleryController::class);
 
-// Route::resource('galleries', GalleryController::class)->middleware('auth:api');
+Route::middleware('api')->get('/user/{id}',[UserController::class,'show']);
+
 
 Route::post('register', [ AuthController::class, 'register' ])->middleware('guest:api');
 Route::post('login', [ AuthController::class, 'login' ])->middleware('guest:api');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gallery;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateGallery;
 use App\Http\Requests\UpdateGallery;
@@ -37,7 +38,8 @@ class GalleryController extends Controller
         return response()->json($results);
     }
 
-    public function store(CreateGallery $request){
+        public function store(CreateGallery $request)
+    {
         $data = $request->validated();
         $gallery = Gallery::create($data);
 
