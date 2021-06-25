@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Gallery;
 use App\Models\User;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateGallery;
 use App\Http\Requests\UpdateGallery;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
 
 
 class GalleryController extends Controller
@@ -14,17 +17,17 @@ class GalleryController extends Controller
     public function index(Request $request)
     {
         $name = $request->query('name', '');
-        $results = Gallery::search($name)->orderBy('id','DESC')->with('images')->with('user');
+        $results = Gallery::search($name)->orderBy('id','DESC')->with('images')->with('user')->with('comments');
         $galleries = $results->get();
 
         return response()->json($galleries);
     }
 
-
     public function show($id){
         $gallery = Gallery::findOrFail($id);
         $images = $gallery->images;
         $user = $gallery->user;
+        $comments = $gallery->comments;
         $results= [
             'id' => $gallery->id,
             'name'=>$gallery->name,
@@ -33,6 +36,7 @@ class GalleryController extends Controller
             'updated_at'=>$gallery->updated_at,
             'images'=>$images,
             'user'=>$user,
+            'comments'=>$comments
         ];
 
         return response()->json($results);
