@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Comment;
 use App\Models\User;
 use App\Models\Gallery;
-
+use Illuminate\Support\Facades\Auth;
 class CommentController extends Controller
 {
     public function index($id)
@@ -22,16 +22,16 @@ class CommentController extends Controller
         return response()->json($comment);
     }
 
-    public function store(CommentRequest $request, $id){
-        $data = $request->validated();
-        $user = auth('api')->user();
-        $comment= Comment::create([
-            "text"=>$data['text'],
-            'gallery_id' =>$id,
-            'user_id' => $user->id
-        ]);
+    public function store(CommentRequest $request){
+        $user = Auth('api')->user();
 
-        return response()->json($comment);
+        $comment = new Comment();
+        $comment->user_id = $user->id;
+        $comment->gallerie_id = $request->input('gallerie_id');
+        $comment->text = $request->input('text');
+        $comment->save();
+
+        return $comment;
     }
 
     public function destroy($id)

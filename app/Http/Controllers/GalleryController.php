@@ -45,7 +45,16 @@ class GalleryController extends Controller
         public function store(CreateGallery $request)
     {
         $data = $request->validated();
-        $gallery = Gallery::create($data);
+        $user = User::findOrFail($request['id']);
+        $user_id = $user->id;
+        $gallery= Gallery::create([
+            "name"=>$data['name'],
+            "description"=>$data['description'],
+            'user_id' => $user_id
+        ]);
+        foreach($data['source'] as $source) {
+            $gallery->addImages($source, $gallery['id']);
+        }
 
         return response()->json($gallery);
     }
