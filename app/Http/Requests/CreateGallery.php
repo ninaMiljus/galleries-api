@@ -26,7 +26,8 @@ class CreateGallery extends FormRequest
         return [
             "name"=> "required | string | min:2 | max:255",
             "description"=>'sometimes | string | max:1000',
-            'source' => 'required|url'
+            'source' => 'required|url',
+            'user_id' => 'required | integer'
         ];
     }
 }
