@@ -20,7 +20,7 @@ class GalleryController extends Controller
         $results = Gallery::search($name)->orderBy('id','DESC')->with('images')->with('user')->with('comments');
         $galleries = $results->get();
 
-        return response()->json($galleries);
+        return $galleries;
     }
 
     public function show($id){

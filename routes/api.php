@@ -34,7 +34,7 @@ Route::middleware('api')->get('/user/{id}',[UserController::class,'show']);
 
 Route::get('/galleries/{id}/comments', [CommentController::class, 'index']);
 Route::middleware('api')->get('/comments/{id}', [CommentController::class, 'show']);
-Route::post('/comments', [CommentController::class, 'store'])->middleware('auth:api');
+Route::post('/galleries/{id}/comments', [CommentController::class, 'store'])->middleware('api');
 Route::middleware('api')->delete('/comments/{id}', [CommentController::class, 'destroy']);
 
 
